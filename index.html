@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Blockchain and Web 3 presentation</title>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+          	<section data-background-gradient="linear-gradient(to top, #4c24ae, #222222)" data-transition="concave" data-transition-speed="slow">
+           		<div class="reveal r-vstack">					
+              		<img src="/web3-girl.svg" width="446.4" height="334.8" alt="girl floating towards website">
+              		<small style="font-size: 0.8rem;"><a href="https://iconscout.com/illustrations/design" target="_blank" rel="noopener">Illustration by IconScout</a></small>
+            	</div>
+              	<h1 style="font-size: 1.7em">An Introduction to the World of Blockchain and Web3</h1>
+          	</section>
+          	<section data-transition="concave" data-transition-speed="slow">
+				<blockquote style="background-color: #4c24ae; padding: 2.5%; border-radius: 20px;">
+					&ldquo;Whereas most technologies tend to automate workers on the periphery doing menial tasks, blockchains automate away the center. Instead of putting the taxi driver out of a job, blockchain puts Uber out of a job and lets the taxi drivers work with the customer directly.&rdquo;
+					<br>Vitalik Buterin
+				</blockquote>
+			</section>
+			<section data-transition="concave" data-transition-speed="slow">
+				<div class="reveal r-vstack">					
+					<img src="/speed-dev.svg" width="446.4" height="334.8" alt="girl floating towards website">
+            		<small style="font-size: 0.8rem;"><a href="https://iconscout.com/illustrations/design" target="_blank" rel="noopener">Illustration by IconScout</a> </small>
+          		</div>
+					<h2> How blockchain technology will secure, ease and enhance business and everyday life</h2>
+			</section>
+			<section data-transition="concave" data-transition-speed="slow">
+				<div class="reveal r-vstack">					
+					<img src="/security.svg" width="350.78" height="263.07" alt="cybersecurity">
+					<small style="font-size: 0.8rem;"><a href="https://iconscout.com/illustrations/design" target="_blank" rel="noopener">Illustration by IconScout</a> </small>
+				</div>
+				<h2>What makes blockchain safe?</h2>
+					<ol>
+						<li class="fragment fade-up"> Cryptography</li>
+						<li class="fragment fade-up"> Decentralisation</li>
+						<li class="fragment fade-up"> Consensus</li>
+					</ol>
+			</section>
+			<section data-auto-animate data-auto-animate-easing="cubic-bezier(0.770, 0.000, 0.175, 1.000)">
+				<div class="r-hstack justify-center">
+					<div class="r-vstack" style="background: #4456af; width: 160px; height: 130px; margin: 10px; border-radius: 10px;"> Genesis block</div>
+					<div class="r-vstack" style="margin: 15px;"> <i class="fa-solid fa-link"></i></div>
+					<div class="r-vstack" style="background: #ff00a6; width: 160px; height: 130px; margin: 10px; border-radius: 10px;"> Block 1</div>
+					<div class="r-vstack" style="margin: 15px;"> <i class="fa-solid fa-link"></i></div>
+					<div class="r-vstack" style="background: #6b00a8; width: 160px; height: 130px; margin: 10px; border-radius: 10px;"> Block 2</div>
+					<div class="r-vstack" style="margin: 15px;"> <i class="fa-solid fa-ellipsis"></i></div>
+					<div class="r-vstack" style="background: #00c1aa; width: 160px; height: 130px; margin: 10px; border-radius: 10px;"> Block N</div>
+				</div>
+				<h2 style="margin-top: 20px;">Blockchain architecture</h2>
+			</section>
+			<section data-transition="concave" data-transition-speed="slow">
+				<h2>A block contains </h2>
+				<p>[in PoW blockchains]</p>
+					<ol>
+						<li class="fragment fade-up"> Index in the chain</li>
+						<li class="fragment fade-up"> Timestamp </li>
+						<li class="fragment fade-up"> Transactions data (amount, sender, recipient) </li>
+						<li class="fragment fade-up"> Hash </li>
+						<li class="fragment fade-up"> Nonce </li>
+						<li class="fragment fade-up"> Hash of the previous block</li>
+					</ol>
+			</section>
+			<section data-transition="concave" data-transition-speed="slow">
+				<h2>How is the hash of a block generated?</h2>
+				<pre><code data-trim data-noescape data-line-numbers="1|5|7-12|14">  
+					generateHash(previousBlockHash, timestamp, pendingTransactions) {
+						let hash = '';
+						let nonce = 0;
+
+						while (hash.substring(0, 3) !== '000') {
+						nonce++;
+						hash = SHA256(
+								previousBlockHash + 
+								timestamp + 
+								JSON.stringify(pendingTransactions) +	
+								nonce
+							).toString();
+						}
+						return { hash, nonce };
+					}
+				</code></pre>
+			</section>
+			<section data-transition="concave" data-transition-speed="slow">
+				<h2>How the nonce works</h2>
+				<pre class="code-wrapper" style="padding: 2.5% 5%; background-color: #4c24ae; border-radius: 20px;">
+					<p>A blockchain may specify that the only acceptable hash is one that starts with '000' </p>
+					<p class="fragment">A 'nonce' number must be added to the string being hashed to calculate the hash. 
+						As a general rule, the nonce begins at zero and is incremented every time the hash is generated until a hash beginning with '000' is found.</p>
+					<p class="fragment">So if we pass 'womendocrypto' as the string to hash, the output is '4c591f540a5bdce39a24ecf5d9aa4abc4bb3b2fb71839aa07ed0fef3100307f2'
+					</p>
+					<p class="fragment">To get a new hash that starts with '000', we'll have to loop through 227 times until we get this string '000efed7fd8dd4f3390aae4f0be6a7bca28255a134a8009fe6c7dd2a0951c73d'</p>
+					<p class="fragment"> Therefore, we have to add '227' to 'womendocrypto' to get the hash that starts with '000'.</p>
+				</pre>
+			</section>
+			<section data-transition="concave" data-transition-speed="slow">
+				<h2>Blockchain transaction process</h2>
+				<img src="/transaction-process.svg" width="946.4" height="328.8" alt="4 right arrows in different colors">
+			</section>
+			<section class="present" data-transition="concave" data-transition-speed="slow">
+				<h2>Amazing use cases</h2>
+				<table>
+					<thead>
+						<tr>
+							<th>Field</th>
+							<th>Example</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Health</td>
+							<td style="color: #8266c6;">Digital health wallet smart property</td>
+						</tr>
+						<tr>
+							<td>IoT</td>
+							<td style="color:#8266c6;">Smart home networks</td>
+						</tr>
+						<tr>
+							<td>Finance</td>
+							<td style="color:#8266c6;">Digital currency payment</td>
+						</tr>
+						<tr>
+							<td>Government Sector</td>
+							<td style="color:#8266c6;">IP registration and exchange</td>
+						</tr>
+					</tbody>
+				</table>
+			</section>
+			<section data-transition="concave" data-transition-speed="slow">
+				<div class="reveal r-vstack">					
+					<img src="/web3.svg" width="446.4" height="334.8" alt="people building new website">
+            		<small style="font-size: 0.8rem;"><a href="https://iconscout.com/illustrations/design" target="_blank" rel="noopener">Illustration by IconScout</a> </small>
+          		</div>
+				<h2> Blockchain is also a building block for Web3</h2>
+			</section>
+			<section data-auto-animate data-auto-animate-easing="cubic-bezier(0.770, 0.000, 0.175, 1.000)" data-transition="concave" data-transition-speed="slow">
+				<h2>What does Web3 actually mean?</h2>
+				<p>History of the web</p>
+				<div class="r-hstack justify-center">
+					<div data-id="box1" style="background: #999; width: 50px; height: 50px; margin: 10px; border-radius: 5px;"></div>
+					<div data-id="box2" style="background: #999; width: 50px; height: 50px; margin: 10px; border-radius: 5px;"></div>
+					<div data-id="box3" style="background: #999; width: 50px; height: 50px; margin: 10px; border-radius: 5px;"></div>
+				</div>
+			</section>
+			<section data-auto-animate data-auto-animate-easing="cubic-bezier(0.770, 0.000, 0.175, 1.000)">
+				<div class="r-hstack justify-center">
+					<div class="r-vstack" data-id="box1" data-auto-animate-delay="0" style="background: #4456af; border-radius: 10px; width: 150px; height: 100px; margin: 10px;"> Web 1</span></div>
+					<div class="r-vstack" style="margin: 15px;"> <i class="fa-solid fa-right-long"></i></div>
+					<div class="r-vstack" data-id="box2" data-auto-animate-delay="0.1" style="background: #ff00a6; border-radius: 10px; width: 150px; height: 100px; margin: 10px;"> Web 2</span></div>
+					<div class="r-vstack" style="margin: 15px;"> <i class="fa-solid fa-right-long"></i></div>
+					<div class="r-vstack" data-id="box3" data-auto-animate-delay="0.2" style="background:  #6b00a8; border-radius: 10px; width: 150px; height: 100px; margin: 10px;"> Web 3</span></div>
+				</div>
+				<h2 style="margin-top: 20px;">The web is continuously evolving</h2>
+			</section>
+			<section data-auto-animate data-auto-animate-easing="cubic-bezier(0.770, 0.000, 0.175, 1.000)">
+				<div class="r-stack">
+					<div data-id="box1" style="background: #4456af; width: 300px; height: 300px; border-radius: 200px;"></div>
+					<div data-id="box2" style="background: #ff00a6; width: 200px; height: 200px; border-radius: 200px;"></div>
+					<div data-id="box3" style="background: #6b00a8; width: 100px; height: 100px; border-radius: 200px;"></div>
+				</div>
+				<h2 style="margin-top: 2rem;">Blockchain reshapes the core of our digital experience</h2>
+			</section>
+			<section data-transition="concave" data-transition-speed="slow">
+				<div class="reveal r-vstack">					
+					<img src="/questions.svg" width="446.4" height="334.8" alt="boy asks girl and robot questions">
+            		<small style="font-size: 0.8rem;"><a href="https://iconscout.com/illustrations/design" target="_blank" rel="noopener">Illustration by IconScout</a> </small>
+          		</div>
+				<h2>What are your thoughts on these intriguing facts?</h2>
+			</section>
+			<section data-transition="concave" data-transition-speed="slow">
+				<h2>Let's continue the conversation!</h2>
+				<div class="reveal r-vstack items-start" style="margin: 3rem 0 0 7rem;">
+					<a href="https://devroxana.com" target="_blank" rel="noopener"><i class="fa-brands fa-instagram" style="margin-right: 2rem;"></i>devroxana</a>
+					<a href="https://devroxana.com/" target="_blank" rel="noopener"><i class="fa-brands fa-facebook" style="margin-right: 2rem;"></i>devroxana</a>
+					<a href="https://devroxana.com" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin" style="margin-right: 2rem;"></i>devroxana</a>
+					<a href="https://devroxana.com" target="_blank" rel="noopener"> <i class="fa-solid fa-globe" style="margin-right: 2rem;"></i>devroxana.com </a>
+				</div>
+			</section>
+			<section>
+				<h2>Thank you for your attention!</h2>
+				<h3 style="margin-top: 3rem;">Presentation created by <a href="https://devroxana.com" target="_blank" rel="noopener">Devroxana</a></h3>
+			</section>
+      </div>
+    </div>
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>
